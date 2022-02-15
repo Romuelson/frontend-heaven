@@ -3,16 +3,13 @@ const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-const APP_PORT = process.env.APP_PORT || 1488
+const APP_PORT = process.env.APP_PORT || 1488;
+const SERVE = process.env.SERVE || false;
 
-module.exports = {
-    mode: 'development',
-    devServer: {
-        port: APP_PORT,
-        historyApiFallback: true
-    },
-    plugins: [
+const pluginService = (SERVE) => {
+    const collector =  [
         new HtmlWebpackPlugin({
             filename: '[name].html',
             template: './public/index.html'
@@ -25,7 +22,22 @@ module.exports = {
             filename: './[file].map',
             exclude: [/runtime.*.*/ ,/vendors.*.*/]
         })
-    ],
+    ];
+
+    if (SERVE) {
+        collector.push(new ReactRefreshWebpackPlugin());
+    }
+
+    return collector;
+}
+
+module.exports = {
+    mode: 'development',
+    devServer: {
+        port: APP_PORT,
+        historyApiFallback: true
+    },
+    plugins: pluginService(SERVE),
     output: {
 		filename: './scripts/[name].js'
     },
@@ -51,6 +63,18 @@ module.exports = {
                 generator: {
                     filename: 'fonts/[name][ext][query]'
                 }
+            },
+            {
+                test: /\.[jt]sx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: require.resolve('babel-loader'),
+                        options: {
+                            plugins: [SERVE && require.resolve('react-refresh/babel')].filter(Boolean),
+                        }
+                    }
+                ]
             }
         ]
     }

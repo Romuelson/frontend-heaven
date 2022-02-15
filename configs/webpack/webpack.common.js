@@ -11,7 +11,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 
 module.exports = {
     entry: {
-        index: './src/index.js'
+        index: './src/index.jsx'
     },
     plugins: [
 		new webpack.DefinePlugin(envKeys)
@@ -22,7 +22,7 @@ module.exports = {
         pathinfo: false
     },
     resolve: {
-		extensions: ['', '.js', '.json']
+		extensions: ['', '.js', '.jsx', '.json', '.css','.scss', '.sass']
 	},
     devtool: false,
     optimization: {
@@ -58,12 +58,13 @@ module.exports = {
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                        cacheDirectory: true
                     }
                 }
             }
