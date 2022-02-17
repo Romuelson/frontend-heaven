@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
@@ -11,10 +12,11 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 
 module.exports = {
     entry: {
-        index: './src/index.jsx'
+        index: './src/index.tsx'
     },
     plugins: [
-		new webpack.DefinePlugin(envKeys)
+		new webpack.DefinePlugin(envKeys),
+        new ForkTsCheckerWebpackPlugin()
 	],
     output: {
         path: path.resolve(__dirname, '../../dist'),
@@ -22,7 +24,7 @@ module.exports = {
         pathinfo: false
     },
     resolve: {
-		extensions: ['', '.js', '.jsx', '.json', '.css','.scss', '.sass']
+		extensions: ['', '.js', '.jsx', '.ts', '.tsx', '.json', '.css','.scss', '.sass']
 	},
     devtool: false,
     optimization: {
@@ -66,6 +68,14 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react'],
                         cacheDirectory: true
                     }
+                }
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                    transpileOnly : true
                 }
             }
         ]
