@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const dotenv = require('dotenv');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
 
 const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
@@ -15,6 +16,7 @@ module.exports = {
         index: './src/index.tsx'
     },
     plugins: [
+        new FriendlyErrorsWebpackPlugin(),
 		new webpack.DefinePlugin(envKeys),
         new ForkTsCheckerWebpackPlugin()
 	],
