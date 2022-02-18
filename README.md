@@ -10,7 +10,7 @@
 
 ## Установка
 
-1. `install [NodeJS](https://nodejs.org/ru/)`
+1. `install` [NodeJS](https://nodejs.org/ru/)
 2. `git clone`
 3. `npm install`
 
