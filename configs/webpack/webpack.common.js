@@ -19,7 +19,9 @@ module.exports = {
 	plugins: [
 		new FriendlyErrorsWebpackPlugin(),
 		new webpack.DefinePlugin(envKeys),
-		new ESLintPlugin(options),
+		new ESLintPlugin({
+			extensions: ['js', 'jsx','ts', 'tsx']
+		}),
 		new ForkTsCheckerWebpackPlugin()
 	],
 	output: {
