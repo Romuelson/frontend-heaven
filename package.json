@@ -19,7 +19,16 @@
 		"url": "git+https://github.com/Romuelson/frontend-heaven.git"
 	},
 	"keywords": [
-		"Frontend"
+		"Frontend",
+		"React",
+		"Babel",
+		"Webpack",
+		"TypeScript",
+		"Sass",
+		"PostCSS",
+		"ESLint",
+		"Prettier",
+		"Stylelint"
 	],
 	"author": "Romuelson",
 	"license": "MIT",

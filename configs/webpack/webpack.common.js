@@ -7,7 +7,7 @@ const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugi
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
-const env = dotenv.config().parsed;
+const env = dotenv.config().parsed || {};
 const envKeys = Object.keys(env).reduce((prev, next) => {
 	prev[`process.env.${next}`] = JSON.stringify(env[next]);
 	return prev;
