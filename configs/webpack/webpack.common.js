@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
@@ -22,6 +23,7 @@ module.exports = {
 		new ESLintPlugin({
 			extensions: ['js', 'jsx','ts', 'tsx']
 		}),
+		new StylelintPlugin(),
 		new ForkTsCheckerWebpackPlugin()
 	],
 	output: {

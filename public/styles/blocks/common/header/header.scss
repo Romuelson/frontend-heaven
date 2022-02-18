@@ -1,9 +1,5 @@
-.header__logo {
-    position: absolute;
-    right: 43.5%;
-    cursor: pointer;
-    background-position: center center;
-    transition-timing-function: ease-in-out;
-    transition-duration: 0.2s;
-    transition-property: all;
+header {
+	position: absolute;
+	text-align: center;
+	background-color: white;
 }
